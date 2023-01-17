@@ -6,6 +6,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import useTodo from "../../Zustandstore/tododata"
 
 export const Inputtodo = () => {
+  let createtodoapi = useTodo((state)=>state.createtodoapi)
+  const fetchtodosapi = useTodo((state) => state.fetchtodosapi)
+  useEffect(() => {
+    fetchtodosapi();
+  }, [createtodoapi])
     let tittleref = useRef()
     let descriptionref = useRef()
 
@@ -15,11 +20,16 @@ export const Inputtodo = () => {
         let description = descriptionref.current.value;
         let data = {tittle , description}
         
-        // if(tittle.length>1 && description.length>5){}
+        if(tittle.length>1 || description.length>2){
+          console.log("data => " , data )
+          createtodoapi(data)
+          tittleref.current.value = ""
+          descriptionref.current.value = ""
+        }
+        else{
+          console.log("maximum length plx")
+        }
 
-            // console.log("data => " , data )
-            tittleref.current.value = ""
-            descriptionref.current.value = ""
     }
   return (
   
@@ -43,14 +53,16 @@ export const Inputtodo = () => {
 export const Todos = () => {
   const todos = useTodo((state)=>state.todos)
     const [checkvalue, setcheckvalue] = useState(false)
-    let checkref = useRef()
+    let todocardref = useRef()
+    let checkinputref = useRef()
+    
   return (
     <>
     {
       todos.map((e)=>{
         return(
-          <main key={e.id} className={`${style.todo_card} ${checkvalue == true && style.workdone}`}>
-        <input type="checkbox" ref={checkref}  onChange={()=>{
+          <main key={e._id || e.id} ref={todocardref} className={`${style.todo_card} ${checkvalue == true && style.workdone}`}>
+        <input type="checkbox" ref={checkinputref}  onChange={()=>{
 {checkvalue == true ?setcheckvalue(false):setcheckvalue(true)};}}/>
 {
     checkvalue == true && <div className={style.delete_icon}>
@@ -67,7 +79,7 @@ export const Todos = () => {
     }
     </>
 //     <main key={props.keyid} className={`${style.todo_card} ${checkvalue == true && style.workdone}`}>
-//         <input type="checkbox" ref={checkref}  onChange={()=>{
+//         <input type="checkbox" ref={checkinputref}  onChange={()=>{
 // {checkvalue == true ?setcheckvalue(false):setcheckvalue(true)};}}/>
 // {
 //     checkvalue == true && <div className={style.delete_icon}>

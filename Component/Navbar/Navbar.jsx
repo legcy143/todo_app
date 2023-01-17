@@ -14,9 +14,6 @@ import {useRouter} from "next/router"
 const Navbar = () => {
   let router = useRouter()
     const dispatch = useDispatch();
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
   return (
     <main className={style.main_nav_bar}>
         <nav className={style.nav}>
@@ -28,19 +25,10 @@ const Navbar = () => {
                 <SearchIcon />
             </section>
             <section className={style.auth_part}>
-            <Badge color="secondary" badgeContent={5} max={9} onClick={handleOpen}>
+            <Badge color="secondary" badgeContent={5} max={9}>
         <NotificationsIcon/>
       </Badge>
 
-      <Modal
-  open={open}
-  onClose={handleClose}
-  className="modal"
-  aria-labelledby="modal-modal-title"
-  aria-describedby="modal-modal-description"
->
-      <Notifaction handleClose = {handleClose}/>
-</Modal>
 <h1 onClick={()=>{router.push("/user/auth")}}>login</h1>
       <img src="/nobita.png" alt="" />
             </section>

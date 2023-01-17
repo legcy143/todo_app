@@ -1,0 +1,30 @@
+
+  @mixin  primaryBtn($bg:var(--primary-color),$color:inherit){
+    padding: 0.5rem 0.5rem;
+    @include flex_box();
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 0.35rem;
+    transition: 0.30s ease;
+    background-color: $bg;
+    color: $color;
+  }
+
+  
+  @mixin scrollbar($width:5px , $height:5px){
+    &::-webkit-scrollbar{
+        overflow: hidden;
+        width: $width;
+        height: $height;
+    }
+    &::-webkit-scrollbar-track{
+        background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb{
+        border-radius: 11rem;
+        background-color: rgba(101, 101, 101, 0.696);
+    }
+  }

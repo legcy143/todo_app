@@ -1,0 +1,28 @@
+@import "../../../styles/mixins";
+
+.notify_container{
+    border-radius: 0.4rem;
+    padding: 0.4rem , 0rem;
+    width: min(30rem , 90%);
+    height: min(40rem  , 85%);
+    background-color: var(--theme-card);
+    overflow-y: scroll;
+    box-shadow: 1px 1px 10px black;
+    @include scrollbar(0px , 0px);
+    nav{
+        padding: 0.5rem;
+        position: sticky;
+        top: 0;
+        text-transform: capitalize;
+        backdrop-filter: blur(50px);
+        @include flexBox(row , space-between);
+        h1{
+            @include textgrad();
+        }
+    }
+}
+
+.message_box{
+    margin: 2rem 0.4rem;
+    border: 1px solid #eee;
+}

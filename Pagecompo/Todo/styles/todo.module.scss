@@ -1,0 +1,7 @@
+@import "../../../styles/mixins";
+
+.todo_main_container{
+    margin: 1rem auto;
+height: 100%;
+width: min(50rem , 100%);
+}

@@ -1,0 +1,66 @@
+@import "../../styles/mixins";
+
+.main_nav_bar{
+    position: sticky;
+    top: 0%;
+    width: 100%;
+    height: $topNavHeight;
+    display: flex;
+    background-color: var(--theme-bg);
+    z-index: 50;
+}
+.nav{
+margin: auto auto 0rem;
+width: min(70rem , 95%);
+height: 90%;
+text-transform: capitalize;
+@include flexBox(row , space-between);
+background-color: rgb(0, 0, 0);
+padding: 0.1rem 0.5rem;
+border-radius: 0.5rem;
+transform: skew(-10deg);
+section{
+    transform: skew(10deg);
+}
+}
+
+.auth_part{
+    @include flexBox($gap:1rem);
+    img{
+        width: 2.3rem;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}
+.middle_part{
+    @include flexBox();
+    position: relative;
+    width: fit-content;
+    input{
+        padding: 0.35rem;
+        font-size: 1rem;
+        padding-right: 2rem;
+        width: 1rem;
+        width: 100%;
+        border-radius: 0.4rem;
+    }
+    svg{
+        width: 2rem;
+        position: absolute;
+        right: 0;
+        color: var(--primary-color);
+    }
+}
+
+@media (max-width:$mobile) {
+    .logo_side{
+        display: none;
+    }
+    .auth_part{
+        @include flexBox($gap:1rem);
+        img{
+            width: 2.1rem;
+        }
+    }
+}

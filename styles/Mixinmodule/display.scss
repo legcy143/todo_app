@@ -1,0 +1,14 @@
+// flex_box
+@mixin flexBox($direction:row , $justify:center , $align:center , $gap:0.5rem){
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    gap: $gap;
+}
+
+// grid wrap
+@mixin gridwrap($width:200px){
+    display: grid;
+    grid-template-columns: repeat(auto-fit , minmax($width , 1fr));
+}

@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@import "./mixins";
+
+.font-family{
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --theme-bg: rgb(32, 31, 32);
+    --theme-color: rgb(194, 194, 194);
+
+    --theme-card: rgb(62, 61, 62);
+    --theme-container: black;
+
+    // --primary-color-rgb: 23, 174, 211;
+    --primary-color: rgb(90, 75, 218);
+    --primary-color-rgb: 90, 75, 218;
+
+    --white-color: rgb(0, 0, 0);
+    --black-color: rgb(0, 0, 0);
+    
+}
+html{
+    scroll-behavior: smooth;
+    font-size: 16px;
+    height: 100%;
+}
+
+body{
+    background-color: var(--theme-bg);
+    color: var(--theme-color);
+    font-family: 'Poppins', sans-serif;
+    @include scrollbar(0px , 0px);
+}
+
+button{
+    font-family: inherit;
+    border-radius: 0.4rem;
+    padding: 0.3rem;
+    text-transform: capitalize;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.4px;
+    @include flexBox();
+    transition: 0.30s ease;
+    color: white;
+    background-color: rgba(var(--primary-color-rgb));
+    box-shadow: 1px 4px 10px rgba(17, 17, 17);
+    cursor: pointer;
+    &:hover{
+        transition: 0.30s ease;
+    }
+}
+input{
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.2rem;
+    padding: 0.2rem;
+    transition: 0.30s ease;
+    outline: none;
+    &::placeholder{
+        opacity: 0.6;
+        color: inherit;
+    }
+    &:hover{
+        transition: 0.30s ease;
+    }
+    &:active{
+        transition: 0.30s ease;
+    }
+}
+
+.theme-chckbox{
+    width: 2rem;
+    aspect-ratio: 1/1;
+    accent-color: red;
+}
+.theme-chckbox:checked{
+    :root{
+        --theme-bg: rgb(143, 14, 14);
+        --theme-color: rgb(202, 197, 197);
+    }
+}

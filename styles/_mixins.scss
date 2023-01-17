@@ -1,0 +1,23 @@
+// varibale
+@import "./Mixinmodule/variable.scss";
+@import "./Mixinmodule/font.scss";
+@import "./Mixinmodule/display.scss";
+@import "./Mixinmodule/component.scss";
+
+
+// media quires
+@mixin mediaQuery($screenWidth){
+    @media (max-width:$screenWidth) {
+        @content;
+    }
+}
+@mixin mobile(){
+    @media (max-width:$mobile) {
+        @content;
+    }
+}
+@mixin laptop(){
+    @media (max-width:900px) {
+        @content;
+    }
+}

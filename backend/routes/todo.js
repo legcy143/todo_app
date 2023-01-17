@@ -32,15 +32,14 @@ router.post("/createtodo" , fetchuser, async (req , res)=>{
 router.delete("/deletetodo/:id" , fetchuser , async(req , res)=>{
     try {
         let todo = await Todo.findById(req.params.id);
-        console.log(todo)
         if(!todo){
-           res.status(400).send({status:"failed" , error:"todo not found"})
+           return res.status(400).send({status:"failed" , error:"todo not found"})
         }
         if(todo.user.toString() != req.user.id){
             return res.status(400).send({status:"failed" , error:"failed try again"})
         }
-let deletetodo = await Todo.findOneAndDelete(req.params.id)
-console.log(deletetodo)
+      let deletetodo = await Todo.findOneAndDelete(req.params.id)
+      console.log(deletetodo)
         // if(todo)
          res.status(200).send({todo , deletetodo})
         

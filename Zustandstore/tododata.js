@@ -3,11 +3,11 @@ import axios from "axios"
 
 const baseurl = 'http://localhost:5000/api'
 
-let authtoken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyIjp7ImlkIjoiNjNjMzc2MDZhODJmNjIzM2QzYThhZDIyIn0sImlhdCI6MTY3Mzk1NzExOSwiZXhwIjoxNjc0MDQzNTE5fQ.psK5FnLETLFbDXmTOLroEbVmdT9nNm1M9hW3r7blDcY"
+let authtoken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyIjp7ImlkIjoiNjNjMzc2MDZhODJmNjIzM2QzYThhZDIyIn0sImlhdCI6MTY3Mzk2OTEzOSwiZXhwIjoxNjc0MDU1NTM5fQ.el3nir7I0kCODUtceVZ-9ZlLgUeLJv8A7QKd3hjrGw4"
 
 let config = {
     headers:{
-        ContentType: "application/json",
+        'Content-Type': 'application/json',
         "auth-token": authtoken
     }
   }
@@ -31,13 +31,9 @@ const useTodo = create((set)=>({
     createtodoapi : (value) => {
       let createtodo = async()=>{
 
-        axios.post(`http://localhost:5000/api/todo/createtodo` ,  {
-            headers:{
-                'Content-Type': 'application/json',
-                "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyIjp7ImlkIjoiNjNjMzc2MDZhODJmNjIzM2QzYThhZDIyIn0sImlhdCI6MTY3Mzk1NzExOSwiZXhwIjoxNjc0MDQzNTE5fQ.psK5FnLETLFbDXmTOLroEbVmdT9nNm1M9hW3r7blDcY'
-            }},
-         value).then((e)=>{
+        axios.post(`${baseurl}/todo/createtodo` ,value ,config).then((e)=>{
             console.log("create todo = >",e)
+            window.location.reload()
         })
 
       }
@@ -46,7 +42,24 @@ const useTodo = create((set)=>({
     },
 
     // deltetodo  api 
-    deletetodoapi : (id) => {console.log("delete todo id =>" , value)}
+    deletetodoapi : (id) => { 
+        try {
+            console.log(id)
+            
+                let createtodo = async()=>{
+        
+                axios.delete(`http://localhost:5000/api/todo/deletetodo/${id}` ,config).then((e)=>{
+                    console.log("create todo = >",e.data)
+                    window.location.reload()
+                })
+        
+              }
+              
+              createtodo()
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 }))
 

@@ -8,7 +8,6 @@
 .auth_profile_card{
     border-radius: 0.5rem;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.6);
-    background-color: var(--theme-card);
     margin: 2rem  0rem;
     width: min(30rem , 90%);
     height: min(21rem , 95%);
@@ -17,6 +16,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    // background-color: var(--theme-card);
+    background-color: #303845;
 }
 .backbtn{
     @include flexBox();

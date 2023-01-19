@@ -66,13 +66,16 @@ router.post("/login" , loginvalidation , async(req , res)=>{
 
 router.post("/fetchuser" ,fetchuser, async(req , res)=>{
     try {
-        let userId = req.user.id;
-        const user = await User.findById(userId).select("-password")
-        // let userdetail = {username : user.username , email:user.email}
-        // res.send(userdetail)
-        res.send(user)
-    } catch (error) {
-        res.status(400).send({status:"failed" , error:"failed to fetch user"})
+        userId = req.user.id;
+        let user = await User.findById(userId).select("-password")
+        if(!user){
+            return res.status(404).send({status:"deactive" , error : "user not found may be account deactivated"})
+        }
+        res.status(200).send({user})
+        // res.send({user})
+    } catch (err) {
+        console.log(err)
+        res.status(401).send({status:"failed" , error:"failed to fetch user" , err})
     }
 })
 module.exports = router

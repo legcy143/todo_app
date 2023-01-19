@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Signup from '../../Pagecompo/Account/Signup'
 import Login from '../../Pagecompo/Account/Login'
 import style from "./account.module.scss"
 import CloseIcon from '@mui/icons-material/Close';
 import { useRouter } from "next/router"
+import useAuth from '../../Zustandstore/authStore';
 
 const auth = () => {
+  let {isauthenticate} = useAuth()
   let router = useRouter()
+    if(isauthenticate){
+      router.push("/")
+    } 
+  
   const [page, setpage] = useState(0)
   return (
     <main className={style.auth_profile_main}>

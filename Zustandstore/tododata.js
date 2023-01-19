@@ -1,61 +1,83 @@
-import {create} from "zustand"
+import { create } from "zustand"
 import axios from "axios"
 
 const baseurl = 'http://localhost:5000/api'
 
-let authtoken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyIjp7ImlkIjoiNjNjMzc2MDZhODJmNjIzM2QzYThhZDIyIn0sImlhdCI6MTY3Mzk2OTEzOSwiZXhwIjoxNjc0MDU1NTM5fQ.el3nir7I0kCODUtceVZ-9ZlLgUeLJv8A7QKd3hjrGw4"
+let authtoken = "";
+if (typeof window !== 'undefined') {
+    authtoken = localStorage.getItem("auth-token")
+}
 
 let config = {
-    headers:{
+    headers: {
         'Content-Type': 'application/json',
         "auth-token": authtoken
     }
-  }
+}
 
-const useTodo = create((set)=>({
-    todos:[],
+const useTodo = create((set) => ({
+    todos: [],
+    fetchtodosapi: async() => {
 
-    fetchtodosapi : () => {
-        let fetchdata = async()=>{
-    axios.get(`${baseurl}/todo/fetchtodos` , config).then((e)=>{
-        console.log(e)
-        set(()=>({
-            todos:e.data.todos.reverse()
-        }))
-    })
+        let fetchdata = async () => {
+            try {
+                axios.get(`${baseurl}/todo/fetchtodos`, config).then((e) => {
+                    // console.log("\n\n e response " , e.status ,"\n")
+                    if(e.data.status == "sucess"){
+                        set(() => ({
+                            todos: e.data.todos.reverse()
+                        }))
+                    }
+                }).catch((err)=>{
+                    // if(err.response.status == 401){
+                    //     console.log("in valid token" )
+                    // }
+                })
+            } catch (error) {
+                console.warn(error)
+            }
         }
         fetchdata()
     },
 
     // create todo api 
-    createtodoapi : (value) => {
-      let createtodo = async()=>{
+    createtodoapi: (value) => {
+        let createtodo = async () => {
+            axios.post(`${baseurl}/todo/createtodo`, value, config).then((e) => {
+                console.log("create todo = >", e)
+                window.location.reload()
+            }).catch((err)=>{
+                if(err.response.status == 401){
+                    console.log("in valid token not create todo" )
+                }
+            })
 
-        axios.post(`${baseurl}/todo/createtodo` ,value ,config).then((e)=>{
-            console.log("create todo = >",e)
-            window.location.reload()
-        })
+        }
 
-      }
-      
-      createtodo()
+        createtodo()
     },
 
     // deltetodo  api 
-    deletetodoapi : (id) => { 
+    deletetodoapi: (id) => {
         try {
             console.log(id)
-            
-                let createtodo = async()=>{
-        
-                axios.delete(`http://localhost:5000/api/todo/deletetodo/${id}` ,config).then((e)=>{
-                    console.log("create todo = >",e.data)
+
+            let createtodo = async () => {
+
+                axios.delete(`http://localhost:5000/api/todo/deletetodo/${id}`, config).then((e) => {
+                    console.log("create todo = >", e.data)
                     window.location.reload()
                 })
-        
-              }
-              
-              createtodo()
+                .catch((err)=>{
+                    console.log(err)
+                    if(err.response.status == 401){
+                        console.log("in valid token not delte todo" )
+                    }
+                })
+
+            }
+
+            createtodo()
         } catch (error) {
             console.log(error)
         }

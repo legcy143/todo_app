@@ -6,6 +6,10 @@ import useTodo from '../../Zustandstore/tododata'
 const Todo = () => {
   const todos = useTodo((state)=>state.todos)
   
+  const fetchtodosapi = useTodo((state)=>state.fetchtodosapi)
+  useEffect(() => {
+    fetchtodosapi()
+  }, [])
   return (
     <main className={style.todo_main_container}>
         <Inputtodo/>

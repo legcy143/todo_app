@@ -55,8 +55,13 @@ const fetchuser = (req , res , next)=>{
         return res.status(401).send({ status: "failed", error: "not a valid token"})
     }
     try {
+        console.log(token)
         const data = jwt.verify(token , jwt_secret);
         req.user = data.User;
+        // console.log("res => " , res , "\n data => " , data)
+        // console.log(req.user)
+        // console.log(data.User)
+        // console.log("veriify")
         next()
     } catch (error) {
         res.status(401).send({ status: "failed", error: "something went wrong "})

@@ -5,7 +5,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import useAuth from '../../Zustandstore/authStore';
 
 const Login = () => {
-  const loginapi = useAuth((state)=>state.loginapi)
+  let {loginapi , userdetail , isauthenticate} = useAuth() 
   
     const [passtype, setpasstype] = useState("password")
     let emailref = useRef()

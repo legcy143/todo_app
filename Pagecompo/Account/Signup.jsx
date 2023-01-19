@@ -5,7 +5,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import useAuth from '../../Zustandstore/authStore';
 
 const Signup = () => {
-  const signupapi = useAuth((state)=>state.signupapi)
+  const signupapi = useAuth((state)=>state?.signupapi)
 
   const [passtype, setpasstype] = useState("password")
   let usernameref = useRef()
@@ -23,14 +23,13 @@ const Signup = () => {
 
       // validation
       if (username.length >= 3 && email.length > 10 && password.length >= 5) {
-        signupapi(data)
         // console.log(data)
+        signupapi(data)
         usernameref.current.value = "";
         emailref.current.value = "";
         passwordref.current.value = "";
       }
       else{
-        signupapi()
         console.log("all filds are required")
       }
 

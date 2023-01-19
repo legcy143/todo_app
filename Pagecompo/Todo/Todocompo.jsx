@@ -5,12 +5,15 @@ import DeleteIcon from '@mui/icons-material/Delete';
 // import { Checkbox } from '@mui/material';
 import useTodo from "../../Zustandstore/tododata"
 
+
 export const Inputtodo = () => {
   const createtodoapi = useTodo((state)=>state.createtodoapi)
   const fetchtodosapi = useTodo((state) => state.fetchtodosapi)
-  useEffect(() => {
-    fetchtodosapi();
-  }, [createtodoapi])
+
+  // useEffect(() => {
+  //   fetchtodosapi();
+  // }, [createtodoapi])
+  
     let tittleref = useRef()
     let descriptionref = useRef()
 
@@ -21,7 +24,7 @@ export const Inputtodo = () => {
         let data = {tittle , description}
         
         if(tittle.length>1 || description.length>2){
-          console.log("data => " , data )
+          // console.log("data => " , data )
           createtodoapi(data)
           tittleref.current.value = ""
           descriptionref.current.value = ""
@@ -52,8 +55,11 @@ export const Inputtodo = () => {
 
 export const Todos = () => {
   const todos = useTodo((state)=>state.todos)
+  // console.log(todos)
   const deletetodoapi = useTodo((state)=>state.deletetodoapi)
+
     const [checkvalue, setcheckvalue] = useState(false)
+
     let todocardref = useRef()
     let checkinputref = useRef()
     

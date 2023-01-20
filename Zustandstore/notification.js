@@ -1,7 +1,7 @@
 import {create} from "zustand"
 
 const useNotification = create(()=>({
-    notification : [
+    notificationdata : [
         {
             id:1,
             message:"welcome to legcy todo web app",
@@ -12,3 +12,5 @@ const useNotification = create(()=>({
         console.log("notification api")
     }
 }))
+
+export default useNotification;

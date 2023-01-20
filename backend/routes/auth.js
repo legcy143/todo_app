@@ -78,4 +78,18 @@ router.post("/fetchuser" ,fetchuser, async(req , res)=>{
         res.status(401).send({status:"failed" , error:"failed to fetch user" , err})
     }
 })
+
+router.delete("/deactiveaccount" , fetchuser , async(req , res)=>{
+    try {
+        // userId = req.user.id;
+        // let user = await User.findById(user.Id)
+        // res.send({userId , user ,User})
+        // console.log(User)
+        // let res = await userId.deleteOne(userId)
+        // res.status(200).send({userId , res})
+    } catch (err) {
+        console.log(err)
+        res.status(500).send({status:"failed" , error:"internal server error" , err})
+    }
+})
 module.exports = router

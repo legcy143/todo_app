@@ -60,6 +60,9 @@ button{
     &:hover{
         transition: 0.30s ease;
     }
+    &:active{
+        transform: scale(0.9);
+    }
 }
 input{
     font-size: 1rem;
